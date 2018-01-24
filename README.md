@@ -1,7 +1,7 @@
 # vlc_youtubeplaylist
 Use/play the VLC Player for YouTube playlists!
 
-You can use the VLC Player for YouTube videos playing with default youtube.lua plugin, this further version of plugin allows play the playlists.<br>
+You can use the VLC Player for YouTube videos playing with default youtube.lua plugin, this upgrade of default plugin allows play the playlists.<br>
 &nbsp;&nbsp;eg http://youtube.com/playlist?list=PL6dFtv5p3AFdo7Rf9wc30suXID3L5du8W<br>
 Restriction: the YouTube download only links of 100 videos first, so this plugin load only this first 100! (further development: it to handle this.)<br>
 <br>
