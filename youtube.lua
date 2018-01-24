@@ -240,13 +240,13 @@ function probe()
 						-- My Hack End[20170110]: add youtube playlist processing (path, name, thumbnail)
              ) )
 end
--- My Hack Begin[20170110]: autonextplay, the infinity playing with the next video
+-- My Hack Begin[20170110]: autonextplay, the endless playing with the next video
 function parse_json(str)
   vlc.msg.dbg("Parsing JSON: " .. str)
   local json = require("dkjson")
   return json.decode(str)
 end
--- My Hack End[20170110]: autonextplay, the infinity playing with the next video
+-- My Hack End[20170110]: autonextplay, the endless playing with the next video
 
 -- My Hack Begin[20170110]: unescape
 -- http://lua.org/pil/20.3.html
@@ -343,12 +343,12 @@ function parse()
         -- fmt is the format of the video
         -- (cf. http://en.wikipedia.org/wiki/YouTube#Quality_and_formats)
         fmt = get_url_param( vlc.path, "fmt" )
-				-- My Hack Begin[20170110]: autonextplay, the infinity playing with the next video
+				-- My Hack Begin[20170110]: autonextplay, the endless playing with the next video
 				-- eg http://youtu.be/KKLT_0qavoU?autonextplay
 				-- eg https://www.youtube.com/watch?v=KKLT_0qavoU&autonextplay
 				local autonextplay = string.match(vlc.path, "&autonextplay")
 				local nextplay = nil
-				-- My Hack End[20170110]: autonextplay, the infinity playing with the next video
+				-- My Hack End[20170110]: autonextplay, the endless playing with the next video
         while true do
             -- Try to find the video's title
             line = vlc.readline()
@@ -359,7 +359,7 @@ function parse()
                 name = vlc.strings.resolve_xml_special_chars( name )
             end
 
-						-- My Hack Begin[20170110]: autonextplay, the infinity playing with the next video
+						-- My Hack Begin[20170110]: autonextplay, the endless playing with the next video
 						if autonextplay then
 							-- get the next first...
 							-- YouT don't give JSON to VLC?
@@ -370,7 +370,7 @@ function parse()
 								autonextplay = false
 							end
 						end
-						-- My Hack End[20170110]: autonextplay, the infinity playing with the next video
+						-- My Hack End[20170110]: autonextplay, the endless playing with the next video
 
             if not description then
                 description = string.match( line, "<p id=\"eow%-description\"[^>]*>(.-)</p>" )
@@ -454,7 +454,7 @@ function parse()
             arturl = get_arturl()
         end
 
-        -- My Hack Begin[20170110]: autonextplay, the infinity playing with the next video
+        -- My Hack Begin[20170110]: autonextplay, the endless playing with the next video
 				--return { { path = path; name = name; description = description; artist = artist; arturl = arturl } }
 				local items = { { path = path; name = name; description = description; artist = artist; arturl = arturl } }
 				if nextplay then
@@ -462,7 +462,7 @@ function parse()
 					table.insert(items, { path = "https://www.youtube.com/watch?v=" .. nextplay .. "&autonextplay" })
 				end
 				return items
-				-- My Hack End[20170110]: autonextplay, the infinity playing with the next video
+				-- My Hack End[20170110]: autonextplay, the endless playing with the next video
 
     elseif string.match( vlc.path, "/get_video_info%?" ) then -- video info API
         local line = vlc.readline() -- data is on one line only
